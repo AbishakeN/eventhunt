@@ -32,13 +32,13 @@ export const Contact: React.FC = () => {
               <div className="p-6 rounded-2xl bg-white border border-slate-200">
                 <Mail className="w-5 h-5 text-indigo-600 mb-2" />
                 <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Email Us</h4>
-                <p className="text-xs text-slate-500 mt-1">support@eventsphere.com</p>
+                <p className="text-xs text-slate-500 mt-1">abishaken0@gmail.com</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-white border border-slate-200">
                 <Phone className="w-5 h-5 text-indigo-600 mb-2" />
                 <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Call Directly</h4>
-                <p className="text-xs text-slate-500 mt-1">+1 (800) 555-EVENT</p>
+                <p className="text-xs text-slate-500 mt-1">+91 8072157287</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-white border border-slate-200">
