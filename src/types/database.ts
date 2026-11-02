@@ -188,3 +188,4 @@ export interface RegistrationAnswer {
   question_id: string;
   answer: string;
 }
+

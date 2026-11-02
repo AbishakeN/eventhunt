@@ -424,3 +424,4 @@ export const EventDetails: React.FC = () => {
     </div>
   );
 };
+

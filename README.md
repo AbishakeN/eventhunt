@@ -99,3 +99,4 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 - [x] **QR Code Camera Scanner:** Live camera scanner, manual lookup, and duplicate check-in rejection.
 - [x] **Attendee Management & CSV Export:** Full attendee table with 1-click CSV download.
 - [x] **Revenue & Analytics:** Recharts visual charts and transaction report export.
+

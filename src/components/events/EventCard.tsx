@@ -92,3 +92,4 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
     </div>
   );
 };
+

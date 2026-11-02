@@ -25,3 +25,46 @@ export const supabase = createClient(
     },
   }
 );
+
+export async function checkSupabaseHealth(): Promise<{
+  connected: boolean;
+  tablesExist: boolean;
+  message: string;
+}> {
+  if (!isSupabaseConfigured) {
+    return {
+      connected: false,
+      tablesExist: false,
+      message: 'Supabase URL and Anon Key are not yet configured.',
+    };
+  }
+
+  try {
+    const { data, error } = await supabase.from('events').select('id').limit(1);
+    if (error) {
+      if (error.code === 'PGRST205' || error.message?.includes('not find the table')) {
+        return {
+          connected: true,
+          tablesExist: false,
+          message: 'Connected to Supabase! Please run the migration script in Supabase SQL Editor to create tables.',
+        };
+      }
+      return {
+        connected: true,
+        tablesExist: false,
+        message: `Supabase returned: ${error.message}`,
+      };
+    }
+    return {
+      connected: true,
+      tablesExist: true,
+      message: 'Supabase PostgreSQL connected & tables verified!',
+    };
+  } catch (err: any) {
+    return {
+      connected: false,
+      tablesExist: false,
+      message: err.message || 'Connection failure to Supabase.',
+    };
+  }
+}

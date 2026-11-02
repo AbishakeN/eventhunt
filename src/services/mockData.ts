@@ -304,3 +304,4 @@ export const CATEGORIES = [
   'Health & Wellness',
   'Education',
 ];
+

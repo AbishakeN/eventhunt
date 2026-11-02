@@ -300,3 +300,4 @@ export const BookerDashboard: React.FC = () => {
     </div>
   );
 };
+

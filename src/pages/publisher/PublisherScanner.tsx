@@ -346,3 +346,4 @@ export const PublisherScanner: React.FC = () => {
     </div>
   );
 };
+

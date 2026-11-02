@@ -257,3 +257,4 @@ export const DigitalTicketModal: React.FC<DigitalTicketModalProps> = ({
     </div>
   );
 };
+

@@ -209,3 +209,4 @@ export const DiscoverEvents: React.FC = () => {
     </div>
   );
 };
+

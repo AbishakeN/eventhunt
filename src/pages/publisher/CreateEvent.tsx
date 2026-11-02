@@ -866,3 +866,4 @@ export const CreateEvent: React.FC = () => {
     </div>
   );
 };
+

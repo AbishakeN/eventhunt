@@ -71,3 +71,4 @@ export function generateRef(): string {
 export function generateSecureToken(): string {
   return 'TKT_' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
 }
+

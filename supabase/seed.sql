@@ -153,3 +153,4 @@ VALUES
   ('t5555555-5555-5555-5555-555555555501', 'e5555555-5555-5555-5555-555555555555', 'General Tasting Entry', 'Access to tasting pavilion with 15 tasting tokens included.', 65.00, 300, 210, 4, 'active'),
   ('t5555555-5555-5555-5555-555555555502', 'e5555555-5555-5555-5555-555555555555', 'Connoisseur VIP Pass', 'Unlimited tastings, sommelier masterclass, and souvenir Riedel tasting glass.', 140.00, 100, 60, 2, 'active')
 ON CONFLICT (id) DO NOTHING;
+

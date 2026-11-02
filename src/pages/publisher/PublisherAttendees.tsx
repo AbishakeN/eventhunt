@@ -314,3 +314,4 @@ export const PublisherAttendees: React.FC = () => {
     </div>
   );
 };
+

@@ -1,6 +1,8 @@
 -- EventSphere Database Schema
 -- Comprehensive schema with Row Level Security, RPCs, and indexes
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- 1. PROFILES TABLE
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -479,7 +481,7 @@ BEGIN
       v_ticket_idx := v_ticket_idx + 1;
       v_ticket_num := v_booking_ref || '-T' || LPAD(v_ticket_idx::text, 2, '0');
       -- Secure non-guessable token for QR verification (does not reveal PII)
-      v_secure_token := 'TKT_' || encode(gen_random_bytes(16), 'hex');
+      v_secure_token := 'TKT_' || replace(gen_random_uuid()::text, '-', '');
 
       INSERT INTO public.tickets (
         booking_id, booking_item_id, ticket_number, secure_token, attendee_name, attendee_email, status
@@ -699,3 +701,4 @@ BEGIN
   RETURN jsonb_build_object('success', true, 'message', 'Booking successfully cancelled');
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+

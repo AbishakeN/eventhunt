@@ -10,8 +10,13 @@ import {
   ArrowUpRight, 
   Clock, 
   CheckCircle2,
-  QrCode
+  QrCode,
+  Database,
+  AlertTriangle,
+  Copy,
+  ExternalLink
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { 
   AreaChart, 
   Area, 
@@ -28,6 +33,7 @@ import {
 } from 'recharts';
 import { useAuth } from '@/contexts/AuthContext';
 import { eventService, bookingService } from '@/services/api';
+import { checkSupabaseHealth } from '@/integrations/supabase/client';
 import { Event, Booking } from '@/types/database';
 import { formatCurrency, formatDateTime } from '@/lib/utils';
 
@@ -35,8 +41,15 @@ export const PublisherOverview: React.FC = () => {
   const { user } = useAuth();
   const [events, setEvents] = useState<Event[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [dbHealth, setDbHealth] = useState<{ connected: boolean; tablesExist: boolean; message: string }>({
+    connected: false,
+    tablesExist: false,
+    message: '',
+  });
 
   useEffect(() => {
+    checkSupabaseHealth().then(setDbHealth);
+
     async function loadStats() {
       if (!user) return;
       setIsLoading(true);
@@ -118,6 +131,37 @@ export const PublisherOverview: React.FC = () => {
           </Link>
         </div>
       </div>
+
+      {/* Supabase Migration Notice Banner if tables need to be created */}
+      {dbHealth.connected && !dbHealth.tablesExist && (
+        <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Database className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-amber-900">
+                Supabase Connected • Initial Database Migration Pending
+              </h4>
+              <p className="text-xs text-amber-700 mt-0.5 max-w-2xl leading-relaxed">
+                Your Supabase project is successfully authenticated! To finish setting up PostgreSQL tables and Row Level Security, copy the contents of <code className="bg-amber-100/80 px-1.5 py-0.5 rounded font-mono text-[11px] font-semibold text-amber-900">supabase/migrations/20261102_initial_schema.sql</code> and execute it in your Supabase SQL Editor.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <a
+              href="https://supabase.com/dashboard/project/qfdbfxzcsudkcofmmqcw/sql/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-800 hover:bg-amber-900 text-white text-xs font-semibold shadow-xs transition"
+            >
+              <span>Open Supabase SQL Editor</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* KPI Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -342,3 +386,4 @@ export const PublisherOverview: React.FC = () => {
     </div>
   );
 };
+
