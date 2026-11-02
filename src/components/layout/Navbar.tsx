@@ -15,34 +15,21 @@ import {
   CheckCircle2, 
   Sparkles,
   ArrowRight,
-  Database,
   AlertCircle
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNotifications } from '@/contexts/NotificationContext';
-import { checkSupabaseHealth } from '@/integrations/supabase/client';
 import { formatTime, cn } from '@/lib/utils';
 
 export const Navbar: React.FC = () => {
-  const { user, role, isAuthenticated, logout, switchRole, isSupabaseLive } = useAuth();
+  const { user, role, isAuthenticated, logout, switchRole } = useAuth();
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [dbStatus, setDbStatus] = useState<{ connected: boolean; tablesExist: boolean; message: string }>({
-    connected: false,
-    tablesExist: false,
-    message: 'Checking database...',
-  });
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    checkSupabaseHealth().then((res) => {
-      setDbStatus(res);
-    });
-  }, []);
 
   const handleRoleToggle = () => {
     const nextRole = role === 'publisher' ? 'booker' : 'publisher';
@@ -108,28 +95,6 @@ export const Navbar: React.FC = () => {
 
           {/* Right Action Icons & Auth */}
           <div className="flex items-center gap-3">
-            {/* Supabase status badge */}
-            <div 
-              className={cn(
-                "hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border cursor-help transition",
-                dbStatus.tablesExist
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : dbStatus.connected
-                  ? "bg-sky-50 text-sky-700 border-sky-200"
-                  : "bg-amber-50 text-amber-700 border-amber-200"
-              )}
-              title={dbStatus.message}
-            >
-              <Database className="w-3.5 h-3.5" />
-              <span>
-                {dbStatus.tablesExist
-                  ? "Supabase Live"
-                  : dbStatus.connected
-                  ? "Supabase Connected (Migration Needed)"
-                  : "Local Storage Mode"}
-              </span>
-            </div>
-
             {/* Role switch toggle pill */}
             {isAuthenticated && (
               <button
