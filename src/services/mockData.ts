@@ -27,7 +27,7 @@ export const INITIAL_PROFILES: Profile[] = [
 export const INITIAL_TICKET_TYPES: TicketType[] = [
   // Event 1: Global AI & Cloud Summit 2026
   {
-    id: 't1111111-1111-1111-1111-111111111101',
+    id: 'a1111111-1111-1111-1111-111111111101',
     event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'General Admission Pass',
     description: '3-day full access to all keynote sessions, breakout rooms, and expo demo stages.',
@@ -39,7 +39,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
   },
   {
-    id: 't1111111-1111-1111-1111-111111111102',
+    id: 'a1111111-1111-1111-1111-111111111102',
     event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'VIP Executive Pass',
     description: 'Priority front row seating, VIP speaker lounge access, catered lunch, and VIP networking dinner.',
@@ -51,7 +51,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
   },
   {
-    id: 't1111111-1111-1111-1111-111111111103',
+    id: 'a1111111-1111-1111-1111-111111111103',
     event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'Academic & Student Pass',
     description: 'Full expo access for verified university students and faculty researchers.',
@@ -65,7 +65,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 2: Echoes Live: Indie & Electronic Music Night
   {
-    id: 't2222222-2222-2222-2222-222222222201',
+    id: 'a2222222-2222-2222-2222-222222222201',
     event_id: 'e2222222-2222-2222-2222-222222222222',
     name: 'Early Bird General Admission',
     description: 'Fast-track venue entry and access to all 3 music performance stages.',
@@ -77,7 +77,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 35 * 86400000).toISOString(),
   },
   {
-    id: 't2222222-2222-2222-2222-222222222202',
+    id: 'a2222222-2222-2222-2222-222222222202',
     event_id: 'e2222222-2222-2222-2222-222222222222',
     name: 'VIP Stage-Deck Access',
     description: 'Elevated VIP viewing deck, 2 complimentary cocktail tokens, and private bar access.',
@@ -91,7 +91,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 3: Product Design & UX Mastery
   {
-    id: 't3333333-3333-3333-3333-333333333301',
+    id: 'a3333333-3333-3333-3333-333333333301',
     event_id: 'e3333333-3333-3333-3333-333333333333',
     name: 'Community Live Stream Pass',
     description: 'Access to the live stream broadcast and public live chat Q&A.',
@@ -103,7 +103,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 25 * 86400000).toISOString(),
   },
   {
-    id: 't3333333-3333-3333-3333-333333333302',
+    id: 'a3333333-3333-3333-3333-333333333302',
     event_id: 'e3333333-3333-3333-3333-333333333333',
     name: 'Pro Interactive Ticket + Figma UI Kit',
     description: 'Live breakout room participation, portfolio review raffle, and raw Figma design system files.',
@@ -117,7 +117,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 4: SaaS Founder & Venture Pitch Forum
   {
-    id: 't4444444-4444-4444-4444-444444444401',
+    id: 'a4444444-4444-4444-4444-444444444401',
     event_id: 'e4444444-4444-4444-4444-444444444444',
     name: 'Founder Attendee Pass',
     description: 'Access to main pitch auditoriums, investor roundtable sessions, and networking lunch.',
@@ -129,7 +129,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 20 * 86400000).toISOString(),
   },
   {
-    id: 't4444444-4444-4444-4444-444444444402',
+    id: 'a4444444-4444-4444-4444-444444444402',
     event_id: 'e4444444-4444-4444-4444-444444444444',
     name: 'Investor Pass',
     description: 'Dedicated deal room access, startup prospectus book, and private evening cocktail reception.',
@@ -143,7 +143,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 5: Artisan Culinary Expo
   {
-    id: 't5555555-5555-5555-5555-555555555501',
+    id: 'a5555555-5555-5555-5555-555555555501',
     event_id: 'e5555555-5555-5555-5555-555555555555',
     name: 'General Tasting Admission',
     description: 'Includes entry and 15 tasting vouchers for gourmet stations.',
@@ -155,7 +155,7 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 15 * 86400000).toISOString(),
   },
   {
-    id: 't5555555-5555-5555-5555-555555555502',
+    id: 'a5555555-5555-5555-5555-555555555502',
     event_id: 'e5555555-5555-5555-5555-555555555555',
     name: 'Sommelier VIP Package',
     description: 'Unlimited gourmet tastings, masterclass with master sommelier, and engraved tasting glass.',
