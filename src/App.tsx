@@ -54,7 +54,7 @@ export const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <NotificationProvider>
-          <BrowserRouter>
+          <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
             <Toaster position="top-right" richColors />
             <Routes>
               {/* Public Pages */}

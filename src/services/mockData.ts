@@ -2,7 +2,7 @@ import { Event, TicketType, Profile } from '@/types/database';
 
 export const INITIAL_PROFILES: Profile[] = [
   {
-    id: 'user-publisher-01',
+    id: '00000000-0000-0000-0000-000000000001',
     full_name: 'Alex Rivera',
     email: 'publisher@eventsphere.com',
     phone: '+1 (555) 234-5678',
@@ -13,7 +13,7 @@ export const INITIAL_PROFILES: Profile[] = [
     created_at: new Date(Date.now() - 60 * 86400000).toISOString(),
   },
   {
-    id: 'user-booker-01',
+    id: '00000000-0000-0000-0000-000000000002',
     full_name: 'Sarah Chen',
     email: 'booker@eventsphere.com',
     phone: '+1 (555) 987-6543',
@@ -27,8 +27,8 @@ export const INITIAL_PROFILES: Profile[] = [
 export const INITIAL_TICKET_TYPES: TicketType[] = [
   // Event 1: Global AI & Cloud Summit 2026
   {
-    id: 'tt-ai-01',
-    event_id: 'ev-ai-summit-2026',
+    id: 't1111111-1111-1111-1111-111111111101',
+    event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'General Admission Pass',
     description: '3-day full access to all keynote sessions, breakout rooms, and expo demo stages.',
     price: 299,
@@ -39,8 +39,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
   },
   {
-    id: 'tt-ai-02',
-    event_id: 'ev-ai-summit-2026',
+    id: 't1111111-1111-1111-1111-111111111102',
+    event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'VIP Executive Pass',
     description: 'Priority front row seating, VIP speaker lounge access, catered lunch, and VIP networking dinner.',
     price: 699,
@@ -51,8 +51,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
   },
   {
-    id: 'tt-ai-03',
-    event_id: 'ev-ai-summit-2026',
+    id: 't1111111-1111-1111-1111-111111111103',
+    event_id: 'e1111111-1111-1111-1111-111111111111',
     name: 'Academic & Student Pass',
     description: 'Full expo access for verified university students and faculty researchers.',
     price: 79,
@@ -65,8 +65,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 2: Echoes Live: Indie & Electronic Music Night
   {
-    id: 'tt-music-01',
-    event_id: 'ev-echoes-music',
+    id: 't2222222-2222-2222-2222-222222222201',
+    event_id: 'e2222222-2222-2222-2222-222222222222',
     name: 'Early Bird General Admission',
     description: 'Fast-track venue entry and access to all 3 music performance stages.',
     price: 45,
@@ -77,8 +77,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 35 * 86400000).toISOString(),
   },
   {
-    id: 'tt-music-02',
-    event_id: 'ev-echoes-music',
+    id: 't2222222-2222-2222-2222-222222222202',
+    event_id: 'e2222222-2222-2222-2222-222222222222',
     name: 'VIP Stage-Deck Access',
     description: 'Elevated VIP viewing deck, 2 complimentary cocktail tokens, and private bar access.',
     price: 120,
@@ -91,8 +91,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 3: Product Design & UX Mastery
   {
-    id: 'tt-ux-01',
-    event_id: 'ev-ux-masterclass',
+    id: 't3333333-3333-3333-3333-333333333301',
+    event_id: 'e3333333-3333-3333-3333-333333333333',
     name: 'Community Live Stream Pass',
     description: 'Access to the live stream broadcast and public live chat Q&A.',
     price: 0,
@@ -103,8 +103,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 25 * 86400000).toISOString(),
   },
   {
-    id: 'tt-ux-02',
-    event_id: 'ev-ux-masterclass',
+    id: 't3333333-3333-3333-3333-333333333302',
+    event_id: 'e3333333-3333-3333-3333-333333333333',
     name: 'Pro Interactive Ticket + Figma UI Kit',
     description: 'Live breakout room participation, portfolio review raffle, and raw Figma design system files.',
     price: 89,
@@ -117,8 +117,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 4: SaaS Founder & Venture Pitch Forum
   {
-    id: 'tt-saas-01',
-    event_id: 'ev-saas-forum',
+    id: 't4444444-4444-4444-4444-444444444401',
+    event_id: 'e4444444-4444-4444-4444-444444444444',
     name: 'Founder Attendee Pass',
     description: 'Access to main pitch auditoriums, investor roundtable sessions, and networking lunch.',
     price: 199,
@@ -129,8 +129,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 20 * 86400000).toISOString(),
   },
   {
-    id: 'tt-saas-02',
-    event_id: 'ev-saas-forum',
+    id: 't4444444-4444-4444-4444-444444444402',
+    event_id: 'e4444444-4444-4444-4444-444444444444',
     name: 'Investor Pass',
     description: 'Dedicated deal room access, startup prospectus book, and private evening cocktail reception.',
     price: 349,
@@ -143,8 +143,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
   // Event 5: Artisan Culinary Expo
   {
-    id: 'tt-culinary-01',
-    event_id: 'ev-culinary-expo',
+    id: 't5555555-5555-5555-5555-555555555501',
+    event_id: 'e5555555-5555-5555-5555-555555555555',
     name: 'General Tasting Admission',
     description: 'Includes entry and 15 tasting vouchers for gourmet stations.',
     price: 65,
@@ -155,8 +155,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
     created_at: new Date(Date.now() - 15 * 86400000).toISOString(),
   },
   {
-    id: 'tt-culinary-02',
-    event_id: 'ev-culinary-expo',
+    id: 't5555555-5555-5555-5555-555555555502',
+    event_id: 'e5555555-5555-5555-5555-555555555555',
     name: 'Sommelier VIP Package',
     description: 'Unlimited gourmet tastings, masterclass with master sommelier, and engraved tasting glass.',
     price: 145,
@@ -170,8 +170,8 @@ export const INITIAL_TICKET_TYPES: TicketType[] = [
 
 export const INITIAL_EVENTS: Event[] = [
   {
-    id: 'ev-ai-summit-2026',
-    publisher_id: 'user-publisher-01',
+    id: 'e1111111-1111-1111-1111-111111111111',
+    publisher_id: '00000000-0000-0000-0000-000000000001',
     title: 'Global AI & Cloud Summit 2026',
     slug: 'global-ai-cloud-summit-2026',
     description: 'Join 3,000+ technology leaders, AI researchers, and cloud architects for the premier conference on Artificial Intelligence, LLMs, and distributed systems architecture. Featuring 40+ keynote speakers from top tech firms, deep-dive technical workshops, and an innovation exhibition floor.',
@@ -195,8 +195,8 @@ export const INITIAL_EVENTS: Event[] = [
     created_at: new Date(Date.now() - 40 * 86400000).toISOString(),
   },
   {
-    id: 'ev-echoes-music',
-    publisher_id: 'user-publisher-01',
+    id: 'e2222222-2222-2222-2222-222222222222',
+    publisher_id: '00000000-0000-0000-0000-000000000001',
     title: 'Echoes Live: Indie & Electronic Music Night',
     slug: 'echoes-live-indie-electronic-music-night',
     description: 'An electric evening of live performances featuring breakthrough indie synth-pop bands, electronic DJs, visual art installations, and curated artisan food trucks under the stars.',
@@ -220,8 +220,8 @@ export const INITIAL_EVENTS: Event[] = [
     created_at: new Date(Date.now() - 35 * 86400000).toISOString(),
   },
   {
-    id: 'ev-ux-masterclass',
-    publisher_id: 'user-publisher-01',
+    id: 'e3333333-3333-3333-3333-333333333333',
+    publisher_id: '00000000-0000-0000-0000-000000000001',
     title: 'Product Design & UX Mastery: Global Masterclass',
     slug: 'product-design-ux-mastery-global-masterclass',
     description: 'An intensive live interactive online workshop for designers and engineers. Learn high-conversion design systems, micro-interactions, accessibility patterns, and AI-assisted Figma prototyping workflows.',
@@ -243,8 +243,8 @@ export const INITIAL_EVENTS: Event[] = [
     created_at: new Date(Date.now() - 25 * 86400000).toISOString(),
   },
   {
-    id: 'ev-saas-forum',
-    publisher_id: 'user-publisher-01',
+    id: 'e4444444-4444-4444-4444-444444444444',
+    publisher_id: '00000000-0000-0000-0000-000000000001',
     title: 'SaaS Founder & Venture Pitch Forum',
     slug: 'saas-founder-venture-pitch-forum',
     description: 'Network with top venture capitalists, angel investors, and high-growth B2B founders. Includes live pitch competitions, breakout mentoring sessions, and an exclusive rooftop networking cocktail hour.',
@@ -268,8 +268,8 @@ export const INITIAL_EVENTS: Event[] = [
     created_at: new Date(Date.now() - 20 * 86400000).toISOString(),
   },
   {
-    id: 'ev-culinary-expo',
-    publisher_id: 'user-publisher-01',
+    id: 'e5555555-5555-5555-5555-555555555555',
+    publisher_id: '00000000-0000-0000-0000-000000000001',
     title: 'Artisan Culinary Expo & Wine Tasting',
     slug: 'artisan-culinary-expo-wine-tasting',
     description: 'Experience gastronomic excellence with over 50 celebrated regional chefs, artisanal chocolatiers, and biodynamic winemakers. Features live cooking demos and unlimited tasting samples.',
@@ -304,4 +304,3 @@ export const CATEGORIES = [
   'Health & Wellness',
   'Education',
 ];
-

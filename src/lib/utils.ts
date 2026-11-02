@@ -6,6 +6,22 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function isUUID(str?: string): boolean {
+  if (!str) return false;
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+}
+
+export function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 export function formatCurrency(amount: number, currency: string = 'USD'): string {
   if (currency === 'INR') {
     return new Intl.NumberFormat('en-IN', {
@@ -71,4 +87,3 @@ export function generateRef(): string {
 export function generateSecureToken(): string {
   return 'TKT_' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
 }
-

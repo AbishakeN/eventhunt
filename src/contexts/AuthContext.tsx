@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Profile, UserRole } from '@/types/database';
 import { supabase, isSupabaseConfigured } from '@/integrations/supabase/client';
 import { INITIAL_PROFILES } from '@/services/mockData';
+import { generateUUID, isUUID } from '@/lib/utils';
 
 interface AuthContextType {
   user: Profile | null;
@@ -57,7 +58,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const savedUser = localStorage.getItem(AUTH_USER_KEY);
       if (savedUser) {
         try {
-          setUser(JSON.parse(savedUser));
+          const parsed = JSON.parse(savedUser);
+          // Auto-migrate legacy mock user IDs to valid UUIDs
+          if (parsed.id === 'user-publisher-01' || !isUUID(parsed.id)) {
+            if (parsed.role === 'publisher') {
+              parsed.id = INITIAL_PROFILES[0].id;
+              parsed.full_name = INITIAL_PROFILES[0].full_name;
+              parsed.email = INITIAL_PROFILES[0].email;
+            } else {
+              parsed.id = INITIAL_PROFILES[1].id;
+              parsed.full_name = INITIAL_PROFILES[1].full_name;
+              parsed.email = INITIAL_PROFILES[1].email;
+            }
+            localStorage.setItem(AUTH_USER_KEY, JSON.stringify(parsed));
+          }
+          setUser(parsed);
         } catch {
           setUser(INITIAL_PROFILES[0]);
         }
@@ -133,7 +148,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Create ad-hoc profile if not found
     const newProfile: Profile = {
-      id: 'usr-' + Math.random().toString(36).substring(2, 9),
+      id: generateUUID(),
       full_name: email.split('@')[0],
       email,
       role: email.includes('publisher') ? 'publisher' : 'booker',
@@ -189,7 +204,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Local fallback
     const newProfile: Profile = {
-      id: 'usr-' + Math.random().toString(36).substring(2, 9),
+      id: generateUUID(),
       full_name: data.fullName,
       email: data.email,
       role: data.role,
@@ -237,7 +252,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const switchRole = (newRole: UserRole) => {
     if (user) {
-      const updated: Profile = { ...user, role: newRole };
+      let targetId = user.id;
+      if (targetId === INITIAL_PROFILES[0].id && newRole === 'booker') {
+        targetId = INITIAL_PROFILES[1].id;
+      } else if (targetId === INITIAL_PROFILES[1].id && newRole === 'publisher') {
+        targetId = INITIAL_PROFILES[0].id;
+      }
+      const matching = INITIAL_PROFILES.find((p) => p.role === newRole);
+      const updated: Profile = {
+        ...user,
+        ...(matching || {}),
+        role: newRole,
+        id: targetId,
+      };
       setUser(updated);
       localStorage.setItem(AUTH_USER_KEY, JSON.stringify(updated));
     }

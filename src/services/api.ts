@@ -1,7 +1,7 @@
 import { supabase, isSupabaseConfigured } from '@/integrations/supabase/client';
 import { Event, TicketType, Booking, BookingItem, Ticket, Notification, Profile, EventStatus } from '@/types/database';
 import { INITIAL_EVENTS, INITIAL_TICKET_TYPES, INITIAL_PROFILES } from './mockData';
-import { generateRef, generateSecureToken } from '@/lib/utils';
+import { generateRef, generateSecureToken, isUUID, generateUUID } from '@/lib/utils';
 
 // Local storage keys for persistent mock mode
 const STORAGE_KEYS = {
@@ -19,6 +19,21 @@ const STORAGE_KEYS = {
 function initializeLocalStorage() {
   if (typeof window === 'undefined') return;
 
+  // Auto-upgrade legacy mock non-UUID strings to valid UUIDs
+  try {
+    const rawEvents = localStorage.getItem(STORAGE_KEYS.EVENTS);
+    const rawProfiles = localStorage.getItem(STORAGE_KEYS.PROFILES);
+    if ((rawEvents && rawEvents.includes('ev-ai-summit-2026')) || (rawProfiles && rawProfiles.includes('user-publisher-01'))) {
+      localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(INITIAL_EVENTS));
+      localStorage.setItem(STORAGE_KEYS.TICKETS_TYPES, JSON.stringify(INITIAL_TICKET_TYPES));
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(INITIAL_PROFILES));
+      localStorage.removeItem(STORAGE_KEYS.BOOKINGS);
+      localStorage.removeItem(STORAGE_KEYS.BOOKING_ITEMS);
+      localStorage.removeItem(STORAGE_KEYS.TICKETS);
+      localStorage.removeItem(STORAGE_KEYS.NOTIFICATIONS);
+    }
+  } catch {}
+
   if (!localStorage.getItem(STORAGE_KEYS.EVENTS)) {
     localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(INITIAL_EVENTS));
   }
@@ -30,7 +45,7 @@ function initializeLocalStorage() {
   }
   if (!localStorage.getItem(STORAGE_KEYS.BOOKINGS)) {
     // Generate an initial sample booking for Booker Sarah Chen
-    const sampleBookingId = 'bk-sample-01';
+    const sampleBookingId = '00000000-0000-0000-0000-000000000010';
     const sampleBookingRef = 'ES-DEMO9824';
     const sampleEvent = INITIAL_EVENTS[0];
     const sampleTicketType = INITIAL_TICKET_TYPES[0];
@@ -38,7 +53,7 @@ function initializeLocalStorage() {
     const sampleBooking: Booking = {
       id: sampleBookingId,
       booking_reference: sampleBookingRef,
-      user_id: 'user-booker-01',
+      user_id: '00000000-0000-0000-0000-000000000002',
       event_id: sampleEvent.id,
       subtotal: 299,
       fees: 15,
@@ -50,7 +65,7 @@ function initializeLocalStorage() {
     };
 
     const sampleItem: BookingItem = {
-      id: 'bki-sample-01',
+      id: '00000000-0000-0000-0000-000000000011',
       booking_id: sampleBookingId,
       ticket_type_id: sampleTicketType.id,
       quantity: 1,
@@ -59,7 +74,7 @@ function initializeLocalStorage() {
     };
 
     const sampleTicket: Ticket = {
-      id: 'tkt-sample-01',
+      id: '00000000-0000-0000-0000-000000000012',
       booking_id: sampleBookingId,
       booking_item_id: sampleItem.id,
       ticket_number: `${sampleBookingRef}-T01`,
@@ -71,8 +86,8 @@ function initializeLocalStorage() {
     };
 
     const sampleNotification: Notification = {
-      id: 'ntf-sample-01',
-      user_id: 'user-booker-01',
+      id: '00000000-0000-0000-0000-000000000013',
+      user_id: '00000000-0000-0000-0000-000000000002',
       title: 'Booking Confirmed: Global AI & Cloud Summit 2026',
       message: 'Your booking ES-DEMO9824 is confirmed. Get ready for an extraordinary experience!',
       notification_type: 'booking',
@@ -230,7 +245,7 @@ export const eventService = {
   },
 
   async getPublisherEvents(publisherId: string) {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(publisherId)) {
       try {
         const { data, error } = await supabase
           .from('events')
@@ -266,12 +281,12 @@ export const eventService = {
   },
 
   async createEvent(eventData: Partial<Event>, ticketTypes: Partial<TicketType>[]) {
-    const newEventId = 'ev-' + Math.random().toString(36).substring(2, 9);
+    const newEventId = generateUUID();
     const slug = eventData.slug || generateRef().toLowerCase();
 
     const fullEvent: Event = {
       id: newEventId,
-      publisher_id: eventData.publisher_id || 'user-publisher-01',
+      publisher_id: eventData.publisher_id || '00000000-0000-0000-0000-000000000001',
       title: eventData.title || 'Untitled Event',
       slug,
       description: eventData.description || '',
@@ -298,8 +313,8 @@ export const eventService = {
       created_at: new Date().toISOString(),
     };
 
-    const newTicketTypes: TicketType[] = ticketTypes.map((t, index) => ({
-      id: 'tt-' + Math.random().toString(36).substring(2, 9) + index,
+    const newTicketTypes: TicketType[] = ticketTypes.map((t) => ({
+      id: generateUUID(),
       event_id: newEventId,
       name: t.name || 'General Admission',
       description: t.description,
@@ -595,7 +610,7 @@ export const bookingService = {
   },
 
   async getUserBookings(userId: string): Promise<Booking[]> {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(userId)) {
       try {
         const { data, error } = await supabase
           .from('bookings')
@@ -641,7 +656,7 @@ export const bookingService = {
   },
 
   async getEventAttendees(eventId: string) {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(eventId)) {
       try {
         const { data, error } = await supabase
           .from('tickets')
@@ -877,7 +892,7 @@ export const checkinService = {
 // ==========================================
 export const notificationService = {
   async getNotifications(userId: string): Promise<Notification[]> {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(userId)) {
       try {
         const { data, error } = await supabase
           .from('notifications')
@@ -897,7 +912,7 @@ export const notificationService = {
   },
 
   async markAsRead(notificationId: string) {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(notificationId)) {
       try {
         await supabase.from('notifications').update({ is_read: true }).eq('id', notificationId);
       } catch (err) {
@@ -913,7 +928,7 @@ export const notificationService = {
   },
 
   async markAllAsRead(userId: string) {
-    if (isSupabaseConfigured) {
+    if (isSupabaseConfigured && isUUID(userId)) {
       try {
         await supabase.from('notifications').update({ is_read: true }).eq('user_id', userId);
       } catch (err) {
